@@ -1,0 +1,22 @@
+<h3>Voters</h3>
+<div class="input-group mb-3">
+  <input
+    #nameInput
+    type="text"
+    class="form-control"
+    placeholder="New voter's name"
+    aria-label="New voter's name"
+    aria-describedby="basic-addon2"
+  />
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      [disabled]="!nameInput.value"
+      (click)="createVoter(nameInput.value)"
+    >
+      Create
+    </button>
+  </div>
+</div>
+<app-grid [rowData]="rowData" [columnDefs]="columnDefs"></app-grid>

@@ -1,0 +1,32 @@
+<div style="display: flex; gap: 30px" class="m-5">
+  <div style="overflow: hidden; flex: 4">
+    <select #voterSelect class="form-select" aria-label="Voter select">
+      <option value="" disabled selected>Choose voter</option>
+      <option *ngFor="let voter of availableVoters" [value]="voter">
+        {{ voter }}
+      </option>
+    </select>
+  </div>
+
+  <div style="flex: 1" class="text-center">votes for</div>
+
+  <div style="overflow: hidden; flex: 4">
+    <select #candidateSelect class="form-select" aria-label="Candidate select">
+      <option value="" disabled selected>Choose candidate</option>
+      <option *ngFor="let candidate of availableCandidates" [value]="candidate">
+        {{ candidate }}
+      </option>
+    </select>
+  </div>
+
+  <div style="flex: 1" class="float-right">
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      [disabled]="!voterSelect.value || !candidateSelect.value"
+      (click)="vote(voterSelect.value, candidateSelect.value)"
+    >
+      Vote
+    </button>
+  </div>
+</div>

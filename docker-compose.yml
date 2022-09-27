@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  voting-app-postgres:
+    image: "postgres:14.5-alpine"
+    container_name: voting-app-postgres
+    volumes:
+      - voting-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+    environment:
+      - POSTGRES_DB=voting
+      - POTGRES_USER=postgres
+      - POSTGRES_PASSWORD=nJ3843Tn_13!
+
+  voting-app-backend:
+    build: ./voting-app-backend
+    container_name: voting-app-backend
+    depends_on:
+      - voting-app-postgres
+
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://voting-app-postgres:5432/voting
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=nJ3843Tn_13!
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
+    ports:
+      - 8080:8080
+    links:
+      - voting-app-postgres
+  
+  voting-app-frontend:
+    build: ./voting-app-frontend
+    container_name: voting-app-frontend
+    ports:
+      - 80:80
+    links:
+      - voting-app-backend
+
+volumes:
+  voting-data:

@@ -1,0 +1,15 @@
+<h1 class="mb-4">Voting app</h1>
+
+<div style="display: flex; gap: 30px" class="mb-5">
+  <div style="overflow: hidden; flex: 1">
+    <app-voter-table (onNewVoter)="refreshVoterNames()"></app-voter-table>
+  </div>
+
+  <div style="overflow: hidden; flex: 1">
+    <app-candidate-table
+      (onNewCandidate)="refreshCandidateNames()"
+    ></app-candidate-table>
+  </div>
+</div>
+
+<app-vote-select (onVoteCast)="refreshTables()"></app-vote-select>
